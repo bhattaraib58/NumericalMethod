@@ -15,15 +15,15 @@ USEAGES:
 
 
 This program solves the problems regarding:
-1.   Errors in numerical computation     
+1.   Errors in numerical computation      
 
-2.   Solution of nonlinear equations
-2.1 Polynomial by Horner's Method
-2.2 Bisection method
-2.3 Newton Raphson method
-2.4 Fixed point iteration method
-2.5 Secant method
-2.6 Horner’s rule
+2.   Solution of nonlinear equations  
+2.1 Polynomial by Horner's Method  
+2.2 Bisection method  
+2.3 Newton Raphson method  
+2.4 Fixed point iteration method  
+2.5 Secant method  
+2.6 Horner’s rule  
 
 3.   Interpolation
 3.1 Finite differences
