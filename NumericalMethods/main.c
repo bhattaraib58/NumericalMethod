@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
+#define EPS 0.00001
+float ExternalFunctionForBisectionMethod(float b,int n,int *a);
 int main()
 {
     int choice=10,i=0;
@@ -18,9 +20,15 @@ int main()
 		switch(choice)
 		{
 			case 1:
+                system("cls");
                 NumericalErrorCalculation();
+                getch();
+                break;
             case 2:
+                system("cls");
                 Chapter2();
+                getch();
+                break;
             case 0:
 				printf("Thank you for Using the Program\n");
 				i=1;  //breaks the loop as 1>0
@@ -36,7 +44,6 @@ int main()
 
 void NumericalErrorCalculation()
 {
-    system("cls");
     float TrueValue,ApproxValue,AbsoluteError, RelativeError,PercentageError, RelativeAccuracy;
     printf("Enter True Value: ");
     scanf("%f", &TrueValue);
@@ -50,7 +57,6 @@ void NumericalErrorCalculation()
     printf("\nThe Relative Error is %f", RelativeError);
     printf("\nThe Percentage Error is %f", PercentageError);
     printf("\nThe Relative Accuracy is %f", RelativeAccuracy);
-    getch();
 }
 
 void Chapter2()
@@ -61,7 +67,7 @@ void Chapter2()
         system("cls");
         printf("Main Menu: \n");
 		printf("Press 1 for Polynomail by Hornor's Method\n");
-		printf("Press 2 for Chapter 2 problems\n");
+		printf("Press 2 for Bisection Methods\n");
 		printf("Press 3 for Displaying all data\n");
 		printf("Press 4 for Deleting all data\n");
 		printf("Press 5 for Searching\n");
@@ -70,10 +76,15 @@ void Chapter2()
 		switch(chapter2choice)
 		{
 			case 1:
+                system("cls");
                 PolynomialHornors();
+                getch();
                 break;
             case 2:
-                Chapter2();
+                system("cls");
+                BisectionMethod();
+                getch();
+                break;
             case 0:
 				printf("Thank you for Using the Program\n");
 				i=1;  //breaks the loop as 1>0
@@ -108,13 +119,76 @@ void PolynomialHornors()
       printf("%d", 0);
       printf("\n\nEnter the Value of X:\t");
       scanf("%d", &x_val);
-      //for(count = degree; count >= 0; count--)
-     // {
-     //       sum = sum + array[count]*pow(x_val, count);
-    //  }
       int pn = array[degree];
       for(count = degree; count >0; count--)
             pn = (pn * x_val) + array[count-1];
       printf("\nEvaluation of Polynomial:\t%d\n", pn);
       getch();
+}
+void BisectionMethod()
+{
+    int n,a[50];
+    float xn,xp,xm;
+    int j=0,i=0;
+    printf("Bisection Method\n");
+    printf("Enter the Degree of Polynomial: ");
+    scanf("%d",&n);
+    printf("\nEnter the Co - Efficients:\n");
+    for(i=n;i>=0;i--)
+    {
+       printf("\nCo - Efficient of X^[%d]: \t",i);
+       scanf("%d", &a[i]);
+    }
+    printf("\nEnter Initial Guess Xn(Low Value): ");
+    scanf("%f",&xn);
+    printf("\nEnter Next Guess Xp(High Value): ");
+    scanf("%f",&xp);
+    xm=(xn+xp)/2;
+    i=1;
+    printf("\n\nn\t\txn\t\txp\t\txm\t\tf(xm)\n");
+    float reasult=0;
+    while(j==0)
+    {
+        printf("%d",i);
+        i++;
+        printf("\t\t%0.4f",xn);
+        printf("\t\t%0.4f",xp);
+        printf("\t\t%0.4f",xm);
+        printf("\t\t%0.4f\n",ExternalFunctionForBisectionMethod(xm,n,a));
+        xm=(xn+xp)/2;
+        if(((xp-xn)/xn)<EPS)
+        {
+            j=40;
+        }
+        if(ExternalFunctionForBisectionMethod(xm,n,a)==0)
+        {
+            j=40;
+        }
+        if(ExternalFunctionForBisectionMethod(xm,n,a)<0)
+        {
+            xn=xm;
+        }
+        if(ExternalFunctionForBisectionMethod(xm,n,a)>0)
+        {
+            xp=xm;
+        }
+    }
+    printf("\n\nThe Value for the Real root is: %f",xm);
+}
+
+float ExternalFunctionForBisectionMethod(float b,int n,int a[])
+{
+    float fx=0,x[50];
+    int l;
+    x[0]=1;
+    for(l=1;l<=n;l++)
+    {
+        x[l]=b*x[l-1];
+    }
+    for(l=0;l<=n;l++)
+    {
+        fx=a[l]*x[l]+fx;
+    }
+   // printf("\n\nThe Value for the Real root is: %f",fx);
+    return fx;
 }
