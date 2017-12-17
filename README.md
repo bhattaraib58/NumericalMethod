@@ -25,46 +25,46 @@ This program solves the problems regarding:
 2.5 Secant method  
 2.6 Horner’s rule  
 
-3.   Interpolation
-3.1 Finite differences
-3.1.1    Forward differences
-3.1.2    Backward differences
-3.1.3    Central differences
-3.1.4    Symbolic relations
-3.2 Newton’s forward and backward formulae
-3.3 Central differences interpolation formula
-3.3.1    Gauss forward and backward formula
-3.3.2    Stirling’s, Bessel’s and Everett’s formulae
-3.4 Lagrange interpolation
-3.5 Method of least square method (LSM)
-3.5.1    LSM for linear equation (y = a + bx)
-3.5.2    LSM for quadratic equation (y = a + bx + cx2)
-3.5.3    LSM for y = axb
-3.5.4    LSM for y = aebx
+3.   Interpolation  
+3.1 Finite differences  
+3.1.1    Forward differences  
+3.1.2    Backward differences  
+3.1.3    Central differences  
+3.1.4    Symbolic relations  
+3.2 Newton’s forward and backward formulae  
+3.3 Central differences interpolation formula  
+3.3.1    Gauss forward and backward formula  
+3.3.2    Stirling’s, Bessel’s and Everett’s formulae  
+3.4 Lagrange interpolation  
+3.5 Method of least square method (LSM)  
+3.5.1    LSM for linear equation (y = a + bx)  
+3.5.2    LSM for quadratic equation (y = a + bx + cx2)  
+3.5.3    LSM for y = axb  
+3.5.4    LSM for y = aebx  
 
-4.   System of linear equations
-4.1 Solution of linear system – direct method
-4.1.1    Gaussian elimination method
-4.1.2    Gauss Jordan method
-4.1.3    Matrix inversion
-4.2 Solution of linear system – indirect method
-4.2.1    Gauss Jacobi iteration method
-4.2.2    Gauss Seidel iteration method
-4.3 Method of factorization, LU decomposition method
-4.4 Eigen vectors and Eigen values, power method
+4.   System of linear equations  
+4.1 Solution of linear system – direct method  
+4.1.1    Gaussian elimination method  
+4.1.2    Gauss Jordan method  
+4.1.3    Matrix inversion  
+4.2 Solution of linear system – indirect method  
+4.2.1    Gauss Jacobi iteration method  
+4.2.2    Gauss Seidel iteration method  
+4.3 Method of factorization, LU decomposition method  
+4.4 Eigen vectors and Eigen values, power method  
 
-5.   Numerical differentiation and integration
-5.1 Numerical differentiation for 1st and 2nd order differentiation
-5.1.1    Forward formula
-5.1.2    Backward formula
-5.1.3    Central difference formula
-5.2 Numerical integration
-5.2.1    Trapezoidal rule
-5.2.2    Simpson’s 1/3 rule and 3/8 rule
-5.2.3    Romberg integration
-5.2.4    Gaussian integration
+5.   Numerical differentiation and integration  
+5.1 Numerical differentiation for 1st and 2nd order differentiation  
+5.1.1    Forward formula  
+5.1.2    Backward formula  
+5.1.3    Central difference formula  
+5.2 Numerical integration  
+5.2.1    Trapezoidal rule  
+5.2.2    Simpson’s 1/3 rule and 3/8 rule  
+5.2.3    Romberg integration  
+5.2.4    Gaussian integration  
 
-6.   Numerical solution of ordinary differential equations
-6.1 Euler’s method and modified Euler’s method
-6.2 Rungekutta 2nd order and 4th order methods
-6.3 Boundary value problem (finite difference method)
+6.   Numerical solution of ordinary differential equations  
+6.1 Euler’s method and modified Euler’s method  
+6.2 Rungekutta 2nd order and 4th order methods  
+6.3 Boundary value problem (finite difference method)  
