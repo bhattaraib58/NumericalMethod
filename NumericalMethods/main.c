@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
-#define EPS 0.00001
-float ExternalFunctionForBisectionMethod(float b,int n,int *a);
+#define EPS 0.0001
+float ExternalFunctionForSolvingEquation(float b,int n,int *a);
 int main()
 {
     int choice=10,i=0;
@@ -68,7 +68,7 @@ void Chapter2()
         printf("Main Menu: \n");
 		printf("Press 1 for Polynomail by Hornor's Method\n");
 		printf("Press 2 for Bisection Methods\n");
-		printf("Press 3 for Displaying all data\n");
+		printf("Press 3 for False Position Method\n");
 		printf("Press 4 for Deleting all data\n");
 		printf("Press 5 for Searching\n");
 		printf("Press 0 to exit\n");
@@ -83,6 +83,11 @@ void Chapter2()
             case 2:
                 system("cls");
                 BisectionMethod();
+                getch();
+                break;
+             case 3:
+                system("cls");
+                FalsePositionMethod();
                 getch();
                 break;
             case 0:
@@ -149,26 +154,26 @@ void BisectionMethod()
     float reasult=0;
     while(j==0)
     {
-        printf("%d",i);
+        printf("\n\n%d",i);
         i++;
         printf("\t\t%0.4f",xn);
         printf("\t\t%0.4f",xp);
         printf("\t\t%0.4f",xm);
-        printf("\t\t%0.4f\n",ExternalFunctionForBisectionMethod(xm,n,a));
+        printf("\t\t%0.4f",ExternalFunctionForSolvingEquation(xm,n,a));
         xm=(xn+xp)/2;
         if(((xp-xn)/xn)<EPS)
         {
             j=40;
         }
-        if(ExternalFunctionForBisectionMethod(xm,n,a)==0)
+        if(ExternalFunctionForSolvingEquation(xm,n,a)==0)
         {
             j=40;
         }
-        if(ExternalFunctionForBisectionMethod(xm,n,a)<0)
+        if(ExternalFunctionForSolvingEquation(xm,n,a)<0)
         {
             xn=xm;
         }
-        if(ExternalFunctionForBisectionMethod(xm,n,a)>0)
+        if(ExternalFunctionForSolvingEquation(xm,n,a)>0)
         {
             xp=xm;
         }
@@ -176,7 +181,7 @@ void BisectionMethod()
     printf("\n\nThe Value for the Real root is: %f",xm);
 }
 
-float ExternalFunctionForBisectionMethod(float b,int n,int a[])
+float ExternalFunctionForSolvingEquation(float b,int n,int a[])
 {
     float fx=0,x[50];
     int l;
@@ -192,3 +197,61 @@ float ExternalFunctionForBisectionMethod(float b,int n,int a[])
    // printf("\n\nThe Value for the Real root is: %f",fx);
     return fx;
 }
+void FalsePositionMethod()
+{
+    int j=0,i=0;
+    int n,array[50];
+    float a,b,c;
+    printf("False Position Method\n");
+    printf("Enter the Degree of Polynomial: ");
+    scanf("%d",&n);
+    printf("\nEnter the Co - Efficients:\n");
+    for(i=n;i>=0;i--)
+    {
+       printf("\nCo - Efficient of X^[%d]: \t",i);
+       scanf("%d", &array[i]);
+    }
+    printf("\nEnter Initial Guess Xn(Low Value): ");
+    scanf("%f",&a);
+    printf("\nEnter Next Guess Xp(High Value): ");
+    scanf("%f",&b);
+    i=1;
+
+    printf("\n\n N\t a\t f(a)\t b\t f(b)\t c\t f(c)\n");
+    float reasultc=0,reasulta=0,reasultb=0;
+    reasulta=ExternalFunctionForSolvingEquation(a,n,array);
+    reasultb=ExternalFunctionForSolvingEquation(b,n,array);
+
+    do
+    {
+        c=((a*reasultb)-(b*reasulta))/(reasultb-reasulta);
+        reasultc=ExternalFunctionForSolvingEquation(c,n,array);
+        printf(" %d",i);
+        i++;
+        printf("\t %0.4f",a);
+        printf("\t %0.4f",reasulta);
+        printf("\t %0.4f",b);
+        printf("\t %0.4f\n",reasultb);
+        printf("\t %0.4f",c);
+        printf("\t %0.4f",reasultc);
+
+        if(reasultc>0)
+        {
+          b=c; // f(b)==f(c);
+          reasultb=reasultc;
+          reasulta=ExternalFunctionForSolvingEquation(a,n,array);
+        }
+        else if(reasultc<0)
+        {
+            a=c; // f(a)==f(c);
+            reasulta=reasultc;
+            reasultb=ExternalFunctionForSolvingEquation(b,n,array);
+        }
+        else if(reasultc==0)
+           break;
+        else
+        {}//nothing
+    } while(fabs(reasultc)>EPS & reasultc!=0);
+    printf("\n\nThe Value for the Real root is: %f",c);
+}
+
