@@ -1,0 +1,74 @@
+Algorithm:
+
+INPUT initial approximation p0;
+tolerance TOL;
+maximum number of iterations N0.
+OUTPUT approximate solution p or message of failure.
+
+Step 1 Set i=1.
+Step 2 While i <= N0 do Steps 3-6.
+Step 3 Set p=g(p0). (Compute pi.)
+Step 4 If |p-p0|<tol mode="hold" /> OUTPUT (p); (The procedure was successful.)
+STOP.
+Step 5 Set i=i+1.
+Step 6 Set p0=p. (Update p0.)
+Step 7 OUTPUT ('The method failed after N0 iterations, N0=', N0);
+(The procedure was unsuccessful.)
+STOP.
+
+
+
+Program Implementation
+
+#include <stdio.h>
+#include <math.h>
+
+double f(double x)
+{
+return x*x*x*x-3*x*x-3;  //change equation for each problem
+}
+
+double g(double x)
+{
+return pow(3*x*x+3,.25);
+}
+
+int main()
+{
+    double p, p0, Tol;
+    int i=1;
+    int No;
+
+    printf("Enter approximate p: ");
+    scanf ("%lf", &p0);
+
+    printf("Desired Tolerance: ");
+    scanf ("%lf", &Tol);
+
+    printf("Maximum Iterations: ");
+    scanf ("%d", &No);
+
+
+    while (i<=No)
+    {
+        p = g(p0);
+
+        if((fabs(p-p0))<Tol)
+        {
+            //printf("%lf", &p);
+            break;
+        }
+        printf("Iteration %d: Current value = %lf\n", i, p);
+
+        i++;  //i=i+1
+        p0=p;
+
+        if (i>No)
+        {
+        printf("Method Failed after %d", No);
+        printf(" iterations");
+        }
+
+    }
+
+}

@@ -33,15 +33,6 @@ int main()
             case 100:
                 system("cls");
                 printf("%s",__FILE__);
-                FILE *fp;
-                char c;
-                fp = fopen(__FILE__,"r");
-                do {
-                     c = getc(fp);
-                     putchar(c);
-                }
-                while(c != EOF);
-                fclose(fp);
                 getch();
                 break;
             case 0:
@@ -86,6 +77,7 @@ void Chapter2()
 		printf("Press 3 for False Position Method\n");
 		printf("Press 4 for Newton Raphson's Method\n");
 		printf("Press 5 for Secant Method\n");
+		printf("Press 6 to view Algorithm And Program of Fixed Point Iteration Method\n");
 		printf("Press 0 to exit\n");
 		scanf("%d",&chapter2choice);
 		switch(chapter2choice)
@@ -112,6 +104,19 @@ void Chapter2()
              case 5:
                 system("cls");
                 SecantMethod();
+                getch();
+                break;
+             case 6:
+                system("cls");
+                FILE *fp;
+                char c;
+                fp = fopen("FixedPointIterationMethod.txt","r");
+                do {
+                     c = getc(fp);
+                     putchar(c);
+                }
+                while(c != EOF);
+                fclose(fp);
                 getch();
                 break;
             case 0:
