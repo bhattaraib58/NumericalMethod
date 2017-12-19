@@ -69,8 +69,8 @@ void Chapter2()
 		printf("Press 1 for Polynomail by Hornor's Method\n");
 		printf("Press 2 for Bisection Methods\n");
 		printf("Press 3 for False Position Method\n");
-		printf("Press 4 for Deleting all data\n");
-		printf("Press 5 for Searching\n");
+		printf("Press 4 for Newton Raphson's Method\n");
+		printf("Press 5 for Secant Method\n");
 		printf("Press 0 to exit\n");
 		scanf("%d",&chapter2choice);
 		switch(chapter2choice)
@@ -88,6 +88,15 @@ void Chapter2()
              case 3:
                 system("cls");
                 FalsePositionMethod();
+                getch();
+                break;
+             case 4:
+                system("cls");
+                //FalsePositionMethod();
+                break;
+             case 5:
+                system("cls");
+                SecantMethod();
                 getch();
                 break;
             case 0:
@@ -254,4 +263,40 @@ void FalsePositionMethod()
     } while(fabs(reasultc)>EPS & reasultc!=0);
     printf("\n\nThe Value for the Real root is: %f",c);
 }
-
+void SecantMethod()
+{
+    int j=0,i=0;
+    int n,array[50];
+    float X0,X1,X2,EEPS;
+    printf("Secant Method\n");
+    printf("Enter the Degree of Polynomial: ");
+    scanf("%d",&n);
+    printf("\nEnter the Co - Efficients:\n");
+    for(i=n;i>=0;i--)
+    {
+       printf("\nCo - Efficient of X^[%d]: \t",i);
+       scanf("%d", &array[i]);
+    }
+    printf("\nEnter Initial Guess X0: ");
+    scanf("%f",&X0);
+    printf("\nEnter Next Guess X1: ");
+    scanf("%f",&X1);
+    i=1;
+    float reasultX0=0,reasultX1=0,reasultX2=0;
+    reasultX0=ExternalFunctionForSolvingEquation(X0,n,array);
+    reasultX1=ExternalFunctionForSolvingEquation(X1,n,array);
+    printf("\n\niter\tX0\t\tX1\t\tX2\t\tf(X2)\n");
+    do
+    {
+        X2=X1-(reasultX1*(X1-X0))/(reasultX1-reasultX0);
+        reasultX2=ExternalFunctionForSolvingEquation(X2,n,array);
+        X0=X1;
+        X1=X2;
+        reasultX0=reasultX1;
+        reasultX1=reasultX2;
+        EEPS=(X2-X1)/X2;
+        printf("%d\t%lf\t%lf\t%lf\t%lf\n",i,X0,X1,X2,reasultX2);
+        i++;
+    } while(fabs(reasultX2)>EPS);
+    printf("\n\nThe Value for the Real root is: %f",X2);
+}
