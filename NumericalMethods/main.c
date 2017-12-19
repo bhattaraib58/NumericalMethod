@@ -15,6 +15,7 @@ int main()
 		printf("Press 3 for Displaying all data\n");
 		printf("Press 4 for Deleting all data\n");
 		printf("Press 5 for Searching\n");
+		printf("Press 100 for Viewing Source Code\n");
 		printf("Press 0 to exit\n");
 		scanf("%d",&choice);
 		switch(choice)
@@ -27,6 +28,20 @@ int main()
             case 2:
                 system("cls");
                 Chapter2();
+                getch();
+                break;
+            case 100:
+                system("cls");
+                printf("%s",__FILE__);
+                FILE *fp;
+                char c;
+                fp = fopen(__FILE__,"r");
+                do {
+                     c = getc(fp);
+                     putchar(c);
+                }
+                while(c != EOF);
+                fclose(fp);
                 getch();
                 break;
             case 0:
