@@ -12,7 +12,7 @@ int main()
         printf("Main Menu: \n");
 		printf("Press 1 for Numerical Error Calculation\n");
 		printf("Press 2 for Chapter 2 problems\n");
-		printf("Press 3 for Displaying all data\n");
+		printf("Press 3 for Chapter 3 problems\n");
 		printf("Press 4 for Deleting all data\n");
 		printf("Press 5 for Searching\n");
 		printf("Press 100 for Viewing Source Code\n");
@@ -28,6 +28,11 @@ int main()
             case 2:
                 system("cls");
                 Chapter2();
+                getch();
+                break;
+            case 3:
+                system("cls");
+                Chapter3();
                 getch();
                 break;
             case 100:
@@ -71,7 +76,7 @@ void Chapter2()
 	while(i<1)  //for infinite loop for the main menu even after function processed
 	{
         system("cls");
-        printf("Main Menu: \n");
+        printf("Chapter 2 Menu: \n");
 		printf("Press 1 for Polynomail by Hornor's Method\n");
 		printf("Press 2 for Bisection Methods\n");
 		printf("Press 3 for False Position Method\n");
@@ -437,4 +442,67 @@ void HornorsMethodForRoot()
             printf("\n\n");
     }
     printf("\nRoot is: %f",root);
+}
+void Chapter3()
+{
+    int chapter3choice=10,i=0;
+	while(i<1)  //for infinite loop for the main menu even after function processed
+	{
+        system("cls");
+        printf("Chapter 3 Menu: \n");
+		printf("Press 1 for Forward Finite Difference Method\n");
+		printf("Press 2 for Backward Finite Difference Method\n");
+		printf("Press 3 for Divided Finite Difference Method\n");
+		/*printf("Press 4 for Newton Raphson's Method\n");
+		printf("Press 5 for Secant Method\n");
+		printf("Press 6 to view Algorithm And Program of Fixed Point Iteration Method\n");
+		printf("Press 7 for Hornor's Method For Finding Root\n");*/
+		printf("Press 0 to Go Back To Main Menu\n");
+		scanf("%d",&chapter3choice);
+		switch(chapter3choice)
+		{
+			case 1:
+                system("cls");
+              //  PolynomialHornors();
+                getch();
+                break;
+            case 2:
+                system("cls");
+           //     BisectionMethod();
+                getch();
+                break;
+             case 3:
+                system("cls");
+           //     FalsePositionMethod();
+                getch();
+                break;
+             case 4:
+                system("cls");
+                //FalsePositionMethod();
+                break;
+             case 5:
+                system("cls");
+                SecantMethod();
+                getch();
+                break;
+             case 6:
+                system("cls");
+
+                getch();
+                break;
+            case 7:
+                system("cls");
+             //   HornorsMethodForRoot();
+                getch();
+                break;
+            case 0:
+				printf("Moving Back to Main Menu\n");
+				i=1;  //breaks the loop as 1>0
+				break;
+			default:
+				printf("Invalid input entered\n");
+				system("pause");
+				break;
+		}
+	}
 }
