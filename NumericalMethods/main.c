@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #define EPS 0.0001
-float ExternalFunctionForSolvingEquation(float b,int n,int *a);
+float ExternalFunctionForSolvingEquation(float b,int n,float *a);
 int main()
 {
     int choice=10,i=0;
@@ -78,7 +78,8 @@ void Chapter2()
 		printf("Press 4 for Newton Raphson's Method\n");
 		printf("Press 5 for Secant Method\n");
 		printf("Press 6 to view Algorithm And Program of Fixed Point Iteration Method\n");
-		printf("Press 0 to exit\n");
+		printf("Press 7 for Hornor's Method For Finding Root\n");
+		printf("Press 0 to Go Back To Main Menu\n");
 		scanf("%d",&chapter2choice);
 		switch(chapter2choice)
 		{
@@ -119,8 +120,13 @@ void Chapter2()
                 fclose(fp);
                 getch();
                 break;
+            case 7:
+                system("cls");
+                HornorsMethodForRoot();
+                getch();
+                break;
             case 0:
-				printf("Thank you for Using the Program\n");
+				printf("Moving Back to Main Menu\n");
 				i=1;  //breaks the loop as 1>0
 				break;
 			default:
@@ -133,35 +139,36 @@ void Chapter2()
 
 void PolynomialHornors()
 {
-      int array[30], degree, x_val, count, sum = 0;
+      float array[30];
+      int degree, x_val, count, sum = 0;
       printf("\nEnter the Degree of Polynomial:\t");
       scanf("%d", &degree);
       printf("\nEnter the Co - Efficients:\n");
       for(count = degree; count >= 0; count--)
       {
-            printf("\nCo - Efficient of A[%d]: \t", count);
-            scanf("%d", &array[count]);
+            printf("\nCo - Efficient of X^[%d]: \t",count);
+            scanf("%f", &array[count]);
       }
       printf("\nThe Polynomial:\n\n");
       for(count = degree; count >= 0; count--)
       {
             if(array[count] != 0)
             {
-                  printf("%dx^%d + ", array[count], count);
+                  printf("%0.1f x^%d + ", array[count], count);
             }
       }
       printf("%d", 0);
       printf("\n\nEnter the Value of X:\t");
       scanf("%d", &x_val);
-      int pn = array[degree];
+      float pn = array[degree];
       for(count = degree; count >0; count--)
             pn = (pn * x_val) + array[count-1];
-      printf("\nEvaluation of Polynomial:\t%d\n", pn);
-      getch();
+      printf("\nEvaluation of Polynomial:\t%f\n", pn);
 }
 void BisectionMethod()
 {
-    int n,a[50];
+    int n;
+    float a[50];
     float xn,xp,xm;
     int j=0,i=0;
     printf("Bisection Method\n");
@@ -171,7 +178,7 @@ void BisectionMethod()
     for(i=n;i>=0;i--)
     {
        printf("\nCo - Efficient of X^[%d]: \t",i);
-       scanf("%d", &a[i]);
+       scanf("%f", &a[i]);
     }
     printf("\nEnter Initial Guess Xn(Low Value): ");
     scanf("%f",&xn);
@@ -210,7 +217,7 @@ void BisectionMethod()
     printf("\n\nThe Value for the Real root is: %f",xm);
 }
 
-float ExternalFunctionForSolvingEquation(float b,int n,int a[])
+float ExternalFunctionForSolvingEquation(float b,int n,float a[])
 {
     float fx=0,x[50];
     int l;
@@ -229,7 +236,8 @@ float ExternalFunctionForSolvingEquation(float b,int n,int a[])
 void FalsePositionMethod()
 {
     int j=0,i=0;
-    int n,array[50];
+    int n;
+    float array[50];
     float a,b,c;
     printf("False Position Method\n");
     printf("Enter the Degree of Polynomial: ");
@@ -238,7 +246,7 @@ void FalsePositionMethod()
     for(i=n;i>=0;i--)
     {
        printf("\nCo - Efficient of X^[%d]: \t",i);
-       scanf("%d", &array[i]);
+       scanf("%f", &array[i]);
     }
     printf("\nEnter Initial Guess Xn(Low Value): ");
     scanf("%f",&a);
@@ -246,7 +254,7 @@ void FalsePositionMethod()
     scanf("%f",&b);
     i=1;
 
-    printf("\n\n N\t a\t f(a)\t b\t f(b)\t c\t f(c)\n");
+    printf("\n\n N\t a\t b\t c\t f(c)\n");
     float reasultc=0,reasulta=0,reasultb=0;
     reasulta=ExternalFunctionForSolvingEquation(a,n,array);
     reasultb=ExternalFunctionForSolvingEquation(b,n,array);
@@ -258,11 +266,9 @@ void FalsePositionMethod()
         printf(" %d",i);
         i++;
         printf("\t %0.4f",a);
-        printf("\t %0.4f",reasulta);
         printf("\t %0.4f",b);
-        printf("\t %0.4f\n",reasultb);
         printf("\t %0.4f",c);
-        printf("\t %0.4f",reasultc);
+        printf("\t %0.4f\n",reasultc);
 
         if(reasultc>0)
         {
@@ -286,7 +292,8 @@ void FalsePositionMethod()
 void SecantMethod()
 {
     int j=0,i=0;
-    int n,array[50];
+    int n;
+    float array[50];
     float X0,X1,X2,EEPS;
     printf("Secant Method\n");
     printf("Enter the Degree of Polynomial: ");
@@ -295,7 +302,7 @@ void SecantMethod()
     for(i=n;i>=0;i--)
     {
        printf("\nCo - Efficient of X^[%d]: \t",i);
-       scanf("%d", &array[i]);
+       scanf("%f", &array[i]);
     }
     printf("\nEnter Initial Guess X0: ");
     scanf("%f",&X0);
@@ -305,7 +312,7 @@ void SecantMethod()
     float reasultX0=0,reasultX1=0,reasultX2=0;
     reasultX0=ExternalFunctionForSolvingEquation(X0,n,array);
     reasultX1=ExternalFunctionForSolvingEquation(X1,n,array);
-    printf("\n\niter\tX0\t\tX1\t\tX2\t\tf(X2)\n");
+    printf("\n\nN\tX0\t\tX1\t\tX2\t\tf(X2)\n");
     do
     {
         X2=X1-(reasultX1*(X1-X0))/(reasultX1-reasultX0);
@@ -319,4 +326,115 @@ void SecantMethod()
         i++;
     } while(fabs(reasultX2)>EPS);
     printf("\n\nThe Value for the Real root is: %f",X2);
+}
+void HornorsMethodForRoot()
+{
+    int n,xn,xp;
+    float ValueForTable[200];
+    float x,a[50],b[50];
+    int j=0,i=0;
+
+    printf("Hornors Rule for finding Roots\n");
+    printf("Enter the Degree of Polynomial: ");
+    scanf("%d",&n);
+    printf("\nEnter the Co - Efficients:\n");
+    for(i=n;i>=0;i--)
+    {
+       printf("\nCo - Efficient of X^[%d]: \t",i);
+       scanf("%f", &a[i]);
+    }
+    printf("\nEnter Minimum Guess for Table(Low Value): ");
+    scanf("%d",&xn);
+    printf("\nEnter Maximum Guess for Table(High Value): ");
+    scanf("%d",&xp);
+
+    //copying from array a to array b
+    for(i=n;i>=0;i--)
+    {
+       b[i]=a[i];
+    }
+
+    int pn = a[n];
+    float AddingValue=0;
+    float root;
+    float q;
+    int MinPower=0;
+    int basePower=0;
+    int rootPower=0;
+    int power;
+    int g=0;
+
+    //solving the eqn in table
+    printf("\tx\t\tf(x)\n");
+    i=xn;
+    for(q=xn;q<=xp;q++)
+    {
+            ValueForTable[i]=ExternalFunctionForSolvingEquation(q,n,b);
+            printf("\t%d\t\t%f\n",i,ValueForTable[i]);
+            if(ValueForTable[i-1]<0 & ValueForTable[i]>0)
+            {
+                x=i-1;
+                break;
+            }
+            i++;
+    }
+    root=x;
+    printf("\nRoot is: %f\n",root);
+    printf("Enter precision required (i.e.no of digits after decimal): ");
+    scanf("%d",&g);
+    while(g>=0)
+    {
+            power=n;
+            MinPower=0;
+            basePower=0;
+            rootPower--;
+            while(n!=MinPower)
+            {
+                AddingValue=0;
+                for(i=n;i>=MinPower;i--)
+                {
+                    b[i]=b[i]+AddingValue;
+                    AddingValue=x*b[i];
+                }
+                MinPower++;
+            }
+
+            //finding auxiliary equation
+            for(i=n;i>=0;i--)
+            {
+                b[i]=b[i]*pow(10,basePower);
+                basePower++;
+            }
+
+            printf("\nThe Auxiliary Polynomial Equation is:\n\n");
+              for(i = n; i >= 0; i--)
+              {
+                    if(b[i] != 0)
+                    {
+                          printf("%f x^%d + ", b[i], i);
+                    }
+              }
+              printf("%d\n*****\n", 0);
+
+            //solving the eqn in table
+            printf("\tx\t\tf(x)\n");
+            i=xn;
+            for(q=xn;q<=xp;q++)
+            {
+                    ValueForTable[i]=ExternalFunctionForSolvingEquation(q,n,b);
+                    printf("\t%d\t\t%f\n",i,ValueForTable[i]);
+                    if(ValueForTable[i-1]<0 & ValueForTable[i]>0)
+                    {
+                        x=i-1;
+                        break;
+                    }
+                    i++;
+            }
+            root=root+(x*pow(10,rootPower));
+            printf("\nNew Root is: %f",root);
+            g--;
+            printf("\n**********************************************************************");
+            printf("\n\n");
+    }
+    printf("\nRoot is: %f",root);
 }
