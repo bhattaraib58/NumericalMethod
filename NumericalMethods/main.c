@@ -450,9 +450,8 @@ void Chapter3()
 	{
         system("cls");
         printf("Chapter 3 Menu: \n");
-		printf("Press 1 for Forward Finite Difference Method\n");
-		printf("Press 2 for Backward Finite Difference Method\n");
-		printf("Press 3 for Divided Finite Difference Method\n");
+		printf("Press 1 for Finite Difference Method (Forward,Backward or ANY)\n");
+		printf("Press 2 for Divided Finite Difference Method\n");
 		/*printf("Press 4 for Newton Raphson's Method\n");
 		printf("Press 5 for Secant Method\n");
 		printf("Press 6 to view Algorithm And Program of Fixed Point Iteration Method\n");
@@ -463,7 +462,7 @@ void Chapter3()
 		{
 			case 1:
                 system("cls");
-              //  PolynomialHornors();
+                FiniteDifferenceInterpolation();
                 getch();
                 break;
             case 2:
@@ -505,4 +504,73 @@ void Chapter3()
 				break;
 		}
 	}
+}
+void FiniteDifferenceInterpolation()
+{
+    float ax[50], ay [50], diff[50][50], nr=1.0, dr=1.0,x,p,h,yp;
+    int n,i,j,k;
+    printf("\nEnter the Number of Table Values:");
+    scanf("%d",&n);
+
+    printf("\nEnter the values of x (only equal height):\n");
+    for (i=0;i<n;i++)
+        scanf("%f",&ax[i]);
+
+    printf("\nEnter the values of y or f(x):\n");
+    for (i=0;i<n;i++)
+        scanf("%f",&ay[i]);
+
+    printf("\nEnter the value of x for which the value of y or F(x) is wanted: ");
+    scanf("%f",&x);
+
+    h=ax[1]-ax[0];
+    //now making the difference table
+    //calculating the 1st order of differences
+    for (i=0;i<n-1;i++)
+        diff[i][1] = ay[i+1]-ay[i];
+
+    //now calculating the second and higher order differences
+    for (j=2;j<=n;j++)
+    {
+        for(i=0;i<n-j;i++)
+        {
+            diff[i][j] = diff[i+1][j-1] - diff[i][j-1];
+        }
+    }
+    //printing in tablular form only
+    printf("\n\tX: ");
+    for (i=0;i<n;i++)
+        printf("%.3f\t",&ax[i]);
+    printf("\n\tF(X): ");
+    for (i=0;i<n;i++)
+        printf("%.3f\t",ay[i]);
+    k=1;
+    for (j=1;j<=n;j++)
+    {
+        printf("\n\tD^%d f0: ",k);
+        for(i=0;i<n-j;i++)
+        {
+            printf("%.3f\t",diff[i][j]);
+        }
+        printf("\n");
+        k++;
+    }
+    //now finding x0
+    i=0;
+    while (!(ax[i]>x))
+        i++;
+
+    //now ax[i] is x0 and ay[i] is y0
+    i--;  //for taking value just less than that
+    p = (x-ax[i])/h;   //finding s
+    yp = ay[i];         //f0
+
+    //now carrying out interpolation
+    for (k=1;k<=n;k++)
+    {
+        nr *=p-k+1;
+        dr *=k;
+        yp +=(nr/dr)*diff[i][k];
+    }
+    printf("\nWhen x = %6.1f, corresponding y = %6.2f\n",x,yp);
 }
